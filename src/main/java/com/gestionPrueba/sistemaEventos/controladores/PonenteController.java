@@ -1,6 +1,7 @@
 package com.gestionPrueba.sistemaEventos.controladores;
 
 import com.gestionPrueba.sistemaEventos.dto.AdDTO;
+import com.gestionPrueba.sistemaEventos.dto.ReservationDTO;
 import com.gestionPrueba.sistemaEventos.servicios.ponente.PonenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,5 +62,10 @@ public class PonenteController {
         }else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @GetMapping("/eventoss/{ponenteId}")
+    public ResponseEntity<List<ReservationDTO>> getAllAdPonentess(@PathVariable Long ponenteId){
+        return ResponseEntity.ok(ponenteService.getAllAdEventos(ponenteId));
     }
 }

@@ -1,9 +1,12 @@
 package com.gestionPrueba.sistemaEventos.servicios.ponente;
 
 import com.gestionPrueba.sistemaEventos.dto.AdDTO;
+import com.gestionPrueba.sistemaEventos.dto.ReservationDTO;
 import com.gestionPrueba.sistemaEventos.entidades.Ad;
+import com.gestionPrueba.sistemaEventos.entidades.Reservation;
 import com.gestionPrueba.sistemaEventos.entidades.User;
 import com.gestionPrueba.sistemaEventos.repositorio.AdRepository;
+import com.gestionPrueba.sistemaEventos.repositorio.ReservationRepository;
 import com.gestionPrueba.sistemaEventos.repositorio.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,9 @@ public class PonenteServiceImpl implements PonenteService{
 
     @Autowired
     private AdRepository adRepository;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     public boolean postAd(Long userId, AdDTO adDTO) throws IOException {
         Optional<User> optionalUser = userRepository.findById(userId);
@@ -78,5 +84,10 @@ public class PonenteServiceImpl implements PonenteService{
             return true;
         }
         return false;
+    }
+
+    public List<ReservationDTO> getAllAdEventos(Long ponenteId){
+        return reservationRepository.findAllByPonenteId(ponenteId)
+                .stream().map(Reservation::getReservationDto).collect(Collectors.toList());
     }
 }
