@@ -64,8 +64,15 @@ public class PonenteController {
         }
     }
 
-    @GetMapping("/eventoss/{ponenteId}")
+    @GetMapping("/eventos/{ponenteId}")
     public ResponseEntity<List<ReservationDTO>> getAllAdPonentess(@PathVariable Long ponenteId){
         return ResponseEntity.ok(ponenteService.getAllAdEventos(ponenteId));
+    }
+
+    @GetMapping("/evento/{eventoId}/{status}")
+    public ResponseEntity<?> changeEventoStatus(@PathVariable Long eventoId, @PathVariable String status){
+        boolean success = ponenteService.changeEventoStatus(eventoId, status);
+        if(success) return ResponseEntity.ok().build();
+        return ResponseEntity.notFound().build();
     }
 }

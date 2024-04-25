@@ -15,4 +15,6 @@ public interface ClientService {
     boolean eventoService(ReservationDTO reservationDTO);
 
     AdDetailsForClientDTO getAdDetailsByAdId(Long adId);
+
+    List<ReservationDTO> getAllEventosByUserId(Long userId);
 }

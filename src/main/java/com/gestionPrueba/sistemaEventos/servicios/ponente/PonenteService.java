@@ -19,4 +19,6 @@ public interface PonenteService {
     boolean deleteAd(Long adId);
 
     List<ReservationDTO> getAllAdEventos(Long ponenteId);
+
+    boolean changeEventoStatus(Long eventoId, String status);
 }

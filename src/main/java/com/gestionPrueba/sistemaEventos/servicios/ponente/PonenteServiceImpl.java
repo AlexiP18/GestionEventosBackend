@@ -5,6 +5,7 @@ import com.gestionPrueba.sistemaEventos.dto.ReservationDTO;
 import com.gestionPrueba.sistemaEventos.entidades.Ad;
 import com.gestionPrueba.sistemaEventos.entidades.Reservation;
 import com.gestionPrueba.sistemaEventos.entidades.User;
+import com.gestionPrueba.sistemaEventos.enums.ReservationStatus;
 import com.gestionPrueba.sistemaEventos.repositorio.AdRepository;
 import com.gestionPrueba.sistemaEventos.repositorio.ReservationRepository;
 import com.gestionPrueba.sistemaEventos.repositorio.UserRepository;
@@ -89,5 +90,21 @@ public class PonenteServiceImpl implements PonenteService{
     public List<ReservationDTO> getAllAdEventos(Long ponenteId){
         return reservationRepository.findAllByPonenteId(ponenteId)
                 .stream().map(Reservation::getReservationDto).collect(Collectors.toList());
+    }
+
+    public boolean changeEventoStatus(Long eventoId, String status){
+        Optional<Reservation> optionalReservation = reservationRepository.findById(eventoId);
+        if(optionalReservation.isPresent()){
+            Reservation existingReservation = optionalReservation.get();
+            if(Objects.equals(status,"Approve")){
+                existingReservation.setReservationStatus(ReservationStatus.APPROVED);
+            }else{
+                existingReservation.setReservationStatus(ReservationStatus.REJECTED);
+            }
+
+            reservationRepository.save(existingReservation);
+            return true;
+        }
+        return false;
     }
 }

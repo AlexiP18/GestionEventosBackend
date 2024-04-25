@@ -39,4 +39,9 @@ public class ClientController {
     public ResponseEntity<?> getAdDetailsByAdId(@PathVariable Long adId){
         return ResponseEntity.ok(clientService.getAdDetailsByAdId(adId));
     }
+
+    @GetMapping("/my-eventos/{userId}")
+    public ResponseEntity<?> getAllEventosByUserId(@PathVariable Long userId){
+        return ResponseEntity.ok(clientService.getAllEventosByUserId(userId));
+    }
 }

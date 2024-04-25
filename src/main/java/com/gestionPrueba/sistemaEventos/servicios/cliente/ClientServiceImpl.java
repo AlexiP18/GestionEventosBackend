@@ -70,4 +70,8 @@ public class ClientServiceImpl implements ClientService{
         }
         return adDetailsForClientDTO;
     }
+
+    public List<ReservationDTO> getAllEventosByUserId(Long userId){
+        return reservationRepository.findAllByUserId(userId).stream().map(Reservation::getReservationDto).collect(Collectors.toList());
+    }
 }
