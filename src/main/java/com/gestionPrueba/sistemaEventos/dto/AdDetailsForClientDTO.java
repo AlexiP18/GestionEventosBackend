@@ -9,5 +9,5 @@ public class AdDetailsForClientDTO {
 
     private AdDTO adDTO;
 
-
+    private List<ReviewDTO> reviewDTOList;
 }

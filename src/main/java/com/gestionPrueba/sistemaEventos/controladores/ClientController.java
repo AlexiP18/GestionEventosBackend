@@ -1,6 +1,7 @@
 package com.gestionPrueba.sistemaEventos.controladores;
 
 import com.gestionPrueba.sistemaEventos.dto.ReservationDTO;
+import com.gestionPrueba.sistemaEventos.dto.ReviewDTO;
 import com.gestionPrueba.sistemaEventos.servicios.cliente.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,5 +44,15 @@ public class ClientController {
     @GetMapping("/my-eventos/{userId}")
     public ResponseEntity<?> getAllEventosByUserId(@PathVariable Long userId){
         return ResponseEntity.ok(clientService.getAllEventosByUserId(userId));
+    }
+
+    @PostMapping("/review")
+    public ResponseEntity<?> giveReview(@RequestBody ReviewDTO reviewDTO){
+        Boolean success = clientService.giveReview(reviewDTO);
+        if(success){
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }
